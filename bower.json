@@ -1,5 +1,5 @@
 {
-  "name": "person-card",
+  "name": "fs-person-card",
   "version": "0.1.0",
   "authors": [
     "Anonymous <anonymous@example.com>"
@@ -10,9 +10,9 @@
     "polymer",
     "FamilySearch"
   ],
-  "main": "person-card.html",
+  "main": "fs-person-card.html",
   "license": "MIT",
-  "homepage": "https://github.com/<USERNAME>/person-card/",
+  "homepage": "https://github.com/york-solutions/fs-person-card/",
   "ignore": [
     "/.*",
     "/test/"

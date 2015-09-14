@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>seed-element Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../person-card.html">
+    <link rel="import" href="../fs-person-card.html">
   </head>
   <body unresolved>
 
-    <p>An example of <code>&lt;person-card&gt;</code>.</p>
+    <p>An example of <code>&lt;fs-person-card&gt;</code>.</p>
     
     <p>Load static:</p>
-    <person-card pid="KWWC-RCL"></person-card>
+    <fs-person-card pid="KWWC-RCL"></fs-person-card>
     
     <p>Dynamic:</p>
     <input type="text" id="pidInput" value="KWWC-RCL"> <button id="loadBtn">Load</button>
@@ -28,8 +28,9 @@
         }),
         input = document.querySelector('#pidInput'),
         wrapper = document.querySelector('#dynamicLoadWrapper');
+        
       document.querySelector('#loadBtn').addEventListener('click', function(){
-        var card = document.createElement('person-card');
+        var card = document.createElement('fs-person-card');
         card.setAttribute('pid', input.value);
         wrapper.innerHTML = '';
         wrapper.appendChild(card);
