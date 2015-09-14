@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fs-global/fs-global.html">
 
 <!--
 A FamilySearch person card.
@@ -49,18 +50,19 @@ Example:
     properties: {
 
       /**
-       * Describes the author of the element, but is really just an excuse to
-       * show off JSDoc annotations.
+       * Person ID
        *
        * @type {{name: string, image: string}}
        */
       pid: String
 
     },
+    
+    behaviors: [FSBehaviors.ClientBehavior],
 
     attached: function() {
       var self = this;
-      client.getAccessToken().then(function(){
+      self.getClient().getAccessToken().then(function(){
         return client.getPerson(self.pid);
       }).then(function(response){
         self.displayPerson(response.getPerson());

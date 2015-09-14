@@ -18,7 +18,7 @@
     <input type="text" id="pidInput" value="KWWC-RCL"> <button id="loadBtn">Load</button>
     <div id="dynamicLoadWrapper"></div>
     
-    <script src="//cdn.jsdelivr.net/familysearch-javascript-sdk/2.1.0/familysearch-javascript-sdk.min.js"></script> 
+    <script src="//cdn.jsdelivr.net/familysearch-javascript-sdk/2.1.0/familysearch-javascript-sdk.min.js"></script>
     <script>
       var client = new FamilySearch({
           client_id: 'a02j00000099Mc2AAE',
@@ -28,6 +28,8 @@
         }),
         input = document.querySelector('#pidInput'),
         wrapper = document.querySelector('#dynamicLoadWrapper');
+        
+      FSBehaviors.ClientBehavior.addClient(client);
         
       document.querySelector('#loadBtn').addEventListener('click', function(){
         var card = document.createElement('fs-person-card');
