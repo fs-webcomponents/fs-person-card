@@ -1,0 +1,81 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A FamilySearch person card.
+
+Example:
+
+    <person-card pid="PPP-PPPP"></person-card>
+
+@group FamilySearch Elements
+@element person-card
+@demo demo/index.html
+-->
+<dom-module id="person-card">
+
+  <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      padding: 8px;
+      background-color: #eee;
+      max-width: 300px;
+    }
+    
+    .header {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+
+  <template>
+    <div class="header">Loading...</div>
+    <img class="loader" src="ajax-loader.gif" />
+    <div class="details">
+      <div class="pid"></div>
+      <div class="lifespan"></div>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'person-card',
+
+    properties: {
+
+      /**
+       * Describes the author of the element, but is really just an excuse to
+       * show off JSDoc annotations.
+       *
+       * @type {{name: string, image: string}}
+       */
+      pid: String
+
+    },
+
+    attached: function() {
+      var self = this;
+      client.getAccessToken().then(function(){
+        return client.getPerson(self.pid);
+      }).then(function(response){
+        self.displayPerson(response.getPerson());
+      }).catch(function(e){
+        console.error(e.stack);
+      });
+    },
+    
+    displayPerson: function(person){
+      this.$$('.header').textContent = person.getDisplayName();
+      this.$$('.pid').textContent = person.getId();
+      this.$$('.lifespan').textContent = person.getDisplayLifeSpan();
+      this.$$('.loader').style.display = 'none';
+    }
+
+  });
+
+</script>
