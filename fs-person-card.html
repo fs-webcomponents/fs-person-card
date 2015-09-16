@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../fs-global/fs-global.html">
+<link rel="import" href="../fs-client/fs-client.html">
+<link rel="import" href="../fs-behavior/fs-behavior.html">
 
 <!--
 A FamilySearch person card.
@@ -31,6 +32,7 @@ Example:
   </style>
 
   <template>
+    <fs-client name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
     <div class="header">Loading...</div>
     <img class="loader" src="ajax-loader.gif" />
     <div class="details">
@@ -52,26 +54,59 @@ Example:
       /**
        * Person ID
        *
-       * @type {{name: string, image: string}}
+       * @type String
        */
-      pid: String
+      pid: {
+        type: String,
+        notify: true,
+        observer: '_idChanged',
+        reflectToAttribute: true
+      },
+      
+      /**
+       * Person
+       * 
+       * @type Object
+       */
+      person: {
+        type: Object,
+        notify: true,
+        observer: '_personChanged'
+      },
+      
+      _loaded: {
+        type: Boolean,
+        value: false
+      }
 
     },
     
-    behaviors: [FSBehaviors.ClientBehavior],
-
+    behaviors: [FSBehavior],
+    
     attached: function() {
-      var self = this;
-      self.getClient().getAccessToken().then(function(){
-        return client.getPerson(self.pid);
-      }).then(function(response){
-        self.displayPerson(response.getPerson());
-      }).catch(function(e){
-        console.error(e.stack);
-      });
+      this.loadPerson();
     },
     
-    displayPerson: function(person){
+    loadPerson: function(){
+      var self = this;
+      if(this.isAuthenticated()){
+        this.getClient().getPerson(this.pid).then(function(response){
+          self.person = response.getPerson();
+        });
+      }
+    },
+    
+    _authenticatedChanged: function(event){
+      if(event.detail.value){
+        this.loadPerson();
+      }
+    },
+    
+    _idChanged: function(id){
+      this.loadPerson();
+    },
+    
+    _personChanged: function(person){
       this.$$('.header').textContent = person.getDisplayName();
       this.$$('.pid').textContent = person.getId();
       this.$$('.lifespan').textContent = person.getDisplayLifeSpan();

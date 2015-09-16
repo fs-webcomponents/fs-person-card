@@ -3,41 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>seed-element Demo</title>
+    <title>fs-person-card Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../fs-client/fs-client.html">
+    <link rel="import" href="../../fs-signin/fs-signin.html">
     <link rel="import" href="../fs-person-card.html">
   </head>
   <body unresolved>
 
     <p>An example of <code>&lt;fs-person-card&gt;</code>.</p>
     
-    <p>Load static:</p>
+    <fs-client client-id="a02j00000099Mc2AAE" redirect-uri="/" environment="sandbox"></fs-client>
+    <fs-signin></fs-signin>
+    <br><br>
     <fs-person-card pid="KWWC-RCL"></fs-person-card>
-    
-    <p>Dynamic:</p>
-    <input type="text" id="pidInput" value="KWWC-RCL"> <button id="loadBtn">Load</button>
-    <div id="dynamicLoadWrapper"></div>
-    
-    <script src="//cdn.jsdelivr.net/familysearch-javascript-sdk/2.1.0/familysearch-javascript-sdk.min.js"></script>
-    <script>
-      var client = new FamilySearch({
-          client_id: 'a02j00000099Mc2AAE',
-          redirect_uri: document.location.origin + '/',
-          environment: 'sandbox',
-          save_access_token: true
-        }),
-        input = document.querySelector('#pidInput'),
-        wrapper = document.querySelector('#dynamicLoadWrapper');
-        
-      FSBehaviors.ClientBehavior.addClient(client);
-        
-      document.querySelector('#loadBtn').addEventListener('click', function(){
-        var card = document.createElement('fs-person-card');
-        card.setAttribute('pid', input.value);
-        wrapper.innerHTML = '';
-        wrapper.appendChild(card);
-      });
-    </script>
 
   </body>
 </html>
