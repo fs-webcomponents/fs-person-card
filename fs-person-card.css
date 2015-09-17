@@ -1,10 +1,24 @@
 :host {
   font-family: arial;
+  --paper-spinner-layer-1-color: var(--paper-grey-400);
+  --paper-spinner-layer-2-color: var(--paper-grey-400);
+  --paper-spinner-layer-3-color: var(--paper-grey-400);
+  --paper-spinner-layer-4-color: var(--paper-grey-400);
 }
 
 paper-card {
   width: 400px;
   min-height: 100px;
+}
+
+.body {
+  position: relative; 
+}
+
+#spinner {
+  position: absolute;
+  left: 50%;
+  top: 10px;
 }
 
 table {

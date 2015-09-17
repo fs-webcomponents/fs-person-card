@@ -3,6 +3,7 @@
 <link rel="import" href="../fs-behavior/fs-behavior.html">
 <link rel="import" href="../fs-person-portrait/fs-person-portrait.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 
 <!--
 A FamilySearch person card.
@@ -28,22 +29,25 @@ Example:
             <div class="pid"></div>
           </div>
         </div>
-        <table class="vitals">
-          <tr class="birth">
-            <th>Birth</th>
-            <td>
-              <div class="date"></div>
-              <div class="place"></div>
-            </td>
-          </tr>
-          <tr class="death">
-            <th>Death</th>
-            <td>
-              <div class="date"></div>
-              <div class="place"></div>
-            </td>
-          </tr>
-        </table>
+        <div class="body">
+          <paper-spinner id="spinner" alt="Loading person details"></paper-spinner>
+          <table class="vitals">
+            <tr class="birth">
+              <th>Birth</th>
+              <td>
+                <div class="date"></div>
+                <div class="place"></div>
+              </td>
+            </tr>
+            <tr class="death">
+              <th>Death</th>
+              <td>
+                <div class="date"></div>
+                <div class="place"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </paper-card>
   </template>
@@ -97,6 +101,7 @@ Example:
     loadPerson: function(){
       var self = this;
       if(!this._requested && this.isAuthenticated() && this.personId){
+        this.$.spinner.active = true;
         this._set_requested(true);
         this.getClient().getPerson(this.personId).then(function(response){
           self.person = response.getPerson();
@@ -123,6 +128,7 @@ Example:
       this.$$('.birth .place').textContent = person.getDisplayBirthPlace();
       this.$$('.death .date').textContent = person.getDisplayDeathDate();
       this.$$('.death .place').textContent = person.getDisplayDeathPlace();
+      this.$.spinner.active = false;
     }
     
   });
