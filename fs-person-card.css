@@ -2,13 +2,23 @@
   display: block;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  padding: 8px;
-  background-color: #eee;
-  max-width: 300px;
+  border-radius: 16px;
+  padding: 16px;
+  width: 400px;
   min-height: 100px;
+  font-family: arial;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .header {
+  overflow: auto;
+}
+
+.name {
   font-size: 18px;
   font-weight: bold;
 }
@@ -16,4 +26,23 @@
 fs-person-portrait {
   float: left;
   margin-right: 16px;
+}
+
+.vitals {
+  margin-top: 8px;
+}
+
+.vitals th {
+  width: 75px;
+  font-weight: normal;
+  vertical-align: top;
+  text-align: right;
+  padding-right: 16px;
+  font-size: smaller;
+  text-transform: uppercase;
+}
+
+.vitals th,
+.vitals td {
+  padding-top: 8px;
 }

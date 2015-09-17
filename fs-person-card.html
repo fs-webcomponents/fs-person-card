@@ -18,12 +18,30 @@ Example:
   <link rel="import" type="css" href="fs-person-card.css">
   <template>
     <fs-client name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
-    <fs-person-portrait id="portrait"></fs-person-portrait>
-    <div class="header">Loading...</div>
-    <img class="loader" src="ajax-loader.gif" />
-    <div class="details">
-      <div class="pid"></div>
-      <div class="lifespan"></div>
+    <div class="header">
+      <fs-person-portrait id="portrait"></fs-person-portrait>
+      <div class="name"></div>
+      <div class="details">
+        <div class="pid"></div>
+      </div>
+    </div>
+    <div class="body">
+      <table class="vitals">
+        <tr class="birth">
+          <th>Birth</th>
+          <td>
+            <div class="date"></div>
+            <div class="place"></div>
+          </td>
+        </tr>
+        <tr class="death">
+          <th>Death</th>
+          <td>
+            <div class="date"></div>
+            <div class="place"></div>
+          </td>
+        </tr>
+      </table>
     </div>
   </template>
 
@@ -94,14 +112,16 @@ Example:
     },
     
     _personChanged: function(person){
-      this.$$('.header').textContent = person.getDisplayName();
-      this.$$('.pid').textContent = person.getId();
-      this.$$('.lifespan').textContent = person.getDisplayLifeSpan();
-      this.$$('.loader').style.display = 'none';
       this.$.portrait.person = person;
       this.$.portrait.gender = person.getDisplayGender();
+      this.$$('.name').textContent = person.getDisplayName();
+      this.$$('.pid').textContent = person.getId();
+      this.$$('.birth .date').textContent = person.getDisplayBirthDate();
+      this.$$('.birth .place').textContent = person.getDisplayBirthPlace();
+      this.$$('.death .date').textContent = person.getDisplayDeathDate();
+      this.$$('.death .place').textContent = person.getDisplayDeathPlace();
     }
-
+    
   });
 
 </script>
