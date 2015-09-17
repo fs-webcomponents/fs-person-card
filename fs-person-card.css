@@ -1,12 +1,10 @@
 :host {
-  display: block;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  padding: 16px;
+  font-family: arial;
+}
+
+paper-card {
   width: 400px;
   min-height: 100px;
-  font-family: arial;
 }
 
 table {

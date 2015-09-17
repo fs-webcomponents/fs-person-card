@@ -2,6 +2,7 @@
 <link rel="import" href="../fs-client/fs-client.html">
 <link rel="import" href="../fs-behavior/fs-behavior.html">
 <link rel="import" href="../fs-person-portrait/fs-person-portrait.html">
+<link rel="import" href="../paper-card/paper-card.html">
 
 <!--
 A FamilySearch person card.
@@ -18,31 +19,33 @@ Example:
   <link rel="import" type="css" href="fs-person-card.css">
   <template>
     <fs-client name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
-    <div class="header">
-      <fs-person-portrait id="portrait"></fs-person-portrait>
-      <div class="name"></div>
-      <div class="details">
-        <div class="pid"></div>
+    <paper-card>
+      <div class="card-content">
+        <div class="header">
+          <fs-person-portrait id="portrait"></fs-person-portrait>
+          <div class="name"></div>
+          <div class="details">
+            <div class="pid"></div>
+          </div>
+        </div>
+        <table class="vitals">
+          <tr class="birth">
+            <th>Birth</th>
+            <td>
+              <div class="date"></div>
+              <div class="place"></div>
+            </td>
+          </tr>
+          <tr class="death">
+            <th>Death</th>
+            <td>
+              <div class="date"></div>
+              <div class="place"></div>
+            </td>
+          </tr>
+        </table>
       </div>
-    </div>
-    <div class="body">
-      <table class="vitals">
-        <tr class="birth">
-          <th>Birth</th>
-          <td>
-            <div class="date"></div>
-            <div class="place"></div>
-          </td>
-        </tr>
-        <tr class="death">
-          <th>Death</th>
-          <td>
-            <div class="date"></div>
-            <div class="place"></div>
-          </td>
-        </tr>
-      </table>
-    </div>
+    </paper-card>
   </template>
 
 </dom-module>
