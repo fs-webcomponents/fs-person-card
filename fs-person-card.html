@@ -58,6 +58,11 @@ Example:
         type: Object,
         notify: true,
         observer: '_personChanged'
+      },
+      
+      _requested: {
+        type: Boolean,
+        readOnly: true
       }
 
     },
@@ -70,7 +75,8 @@ Example:
     
     loadPerson: function(){
       var self = this;
-      if(this.isAuthenticated()){
+      if(!this._requested && this.isAuthenticated() && this.personId){
+        this._set_requested(true);
         this.getClient().getPerson(this.personId).then(function(response){
           self.person = response.getPerson();
         });
@@ -83,7 +89,7 @@ Example:
       }
     },
     
-    _idChanged: function(id){
+    _idChanged: function(){
       this.loadPerson();
     },
     
@@ -93,6 +99,7 @@ Example:
       this.$$('.lifespan').textContent = person.getDisplayLifeSpan();
       this.$$('.loader').style.display = 'none';
       this.$.portrait.person = person;
+      this.$.portrait.gender = person.getDisplayGender();
     }
 
   });
