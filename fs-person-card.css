@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 8px;
+  background-color: #eee;
+  max-width: 300px;
+  min-height: 100px;
+}
+
+.header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+fs-person-portrait {
+  float: left;
+  margin-right: 16px;
+}

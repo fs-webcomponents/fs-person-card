@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fs-client/fs-client.html">
 <link rel="import" href="../fs-behavior/fs-behavior.html">
+<link rel="import" href="../fs-person-portrait/fs-person-portrait.html">
 
 <!--
 A FamilySearch person card.
@@ -14,25 +15,10 @@ Example:
 @demo demo/index.html
 -->
 <dom-module id="fs-person-card">
-
-  <style>
-    :host {
-      display: block;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      padding: 8px;
-      background-color: #eee;
-      max-width: 300px;
-    }
-    
-    .header {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
-
+  <link rel="import" type="css" href="fs-person-card.css">
   <template>
     <fs-client name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
+    <fs-person-portrait id="portrait"></fs-person-portrait>
     <div class="header">Loading...</div>
     <img class="loader" src="ajax-loader.gif" />
     <div class="details">
@@ -56,7 +42,7 @@ Example:
        *
        * @type String
        */
-      pid: {
+      personId: {
         type: String,
         notify: true,
         observer: '_idChanged',
@@ -72,11 +58,6 @@ Example:
         type: Object,
         notify: true,
         observer: '_personChanged'
-      },
-      
-      _loaded: {
-        type: Boolean,
-        value: false
       }
 
     },
@@ -90,7 +71,7 @@ Example:
     loadPerson: function(){
       var self = this;
       if(this.isAuthenticated()){
-        this.getClient().getPerson(this.pid).then(function(response){
+        this.getClient().getPerson(this.personId).then(function(response){
           self.person = response.getPerson();
         });
       }
@@ -111,6 +92,7 @@ Example:
       this.$$('.pid').textContent = person.getId();
       this.$$('.lifespan').textContent = person.getDisplayLifeSpan();
       this.$$('.loader').style.display = 'none';
+      this.$.portrait.person = person;
     }
 
   });
