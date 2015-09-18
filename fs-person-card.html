@@ -8,9 +8,18 @@
 <!--
 A FamilySearch person card.
 
-Example:
+Basic example:
 
     <fs-person-card person-id="PPP-PPPP"></fs-person-card>
+    
+You can also specify toolbar actions for the paper card:
+
+    <fs-person-card person-id="PPP-PPPP">
+      <div class="card-actions">
+        <paper-button>Action</paper-button>
+        <paper-icon-button icon="favorite"></paper-icon-button>
+      </div>
+    </fs-person-card>
 
 @group FamilySearch Elements
 @element fs-person-card
@@ -49,6 +58,7 @@ Example:
           </table>
         </div>
       </div>
+      <content></content>
     </paper-card>
   </template>
 

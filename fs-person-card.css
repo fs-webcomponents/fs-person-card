@@ -1,4 +1,5 @@
 :host {
+  display: block;
   font-family: arial;
   --paper-spinner-layer-1-color: var(--paper-grey-400);
   --paper-spinner-layer-2-color: var(--paper-grey-400);

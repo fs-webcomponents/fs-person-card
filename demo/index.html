@@ -8,13 +8,29 @@
     <link rel="import" href="../../fs-client/fs-client.html">
     <link rel="import" href="../../fs-signin/fs-signin.html">
     <link rel="import" href="../fs-person-card.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link  rel="import"href="../../iron-icons/iron-icons.html">
   </head>
   <body unresolved>
+    <style>
+      fs-person-card {
+        margin-top: 16px;
+      }
+    </style>
 
     <fs-client client-id="a02j00000099Mc2AAE" redirect-uri="/" environment="sandbox" save-access-token></fs-client>
     <fs-signin></fs-signin>
-    <br><br>
+
+    <h3>Basic</h3>
     <fs-person-card person-id="KW7H-D56"></fs-person-card>
+    
+    <h3>Specify toolbar actions</h3>
+    <fs-person-card person-id="KWQM-16Y">
+      <div class="card-actions">
+        <paper-button>Action</paper-button>
+        <paper-icon-button icon="favorite"></paper-icon-button>
+      </div>
+    </fs-person-card>
 
   </body>
 </html>
