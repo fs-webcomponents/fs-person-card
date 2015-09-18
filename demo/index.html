@@ -12,9 +12,11 @@
     <link  rel="import"href="../../iron-icons/iron-icons.html">
   </head>
   <body unresolved>
-    <style>
-      fs-person-card {
-        margin-top: 16px;
+    <style is="custom-style">
+      #styled {
+        --fs-person-card-width: 500px;
+        --fs-person-portrait-border-radius: 75px;
+        --fs-person-portrait-size: 150px;
       }
     </style>
 
@@ -31,6 +33,11 @@
         <paper-icon-button icon="favorite"></paper-icon-button>
       </div>
     </fs-person-card>
+    
+    <h3>Styling</h3>
+    <p>Change the default width with <code>--fs-person-card-width</code> and change the portrait 
+    style with the <code>fs-person-portrait</code> custom style properties</p>
+    <fs-person-card id="styled" person-id="KW7H-D56"></fs-person-card>
 
   </body>
 </html>

@@ -2,6 +2,7 @@
 <link rel="import" href="../fs-client/fs-client.html">
 <link rel="import" href="../fs-behavior/fs-behavior.html">
 <link rel="import" href="../fs-person-portrait/fs-person-portrait.html">
+<link rel="import" href="../fs-person-summary/fs-person-summary.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-spinner/paper-spinner.html">
 
@@ -20,6 +21,16 @@ You can also specify toolbar actions for the paper card:
         <paper-icon-button icon="favorite"></paper-icon-button>
       </div>
     </fs-person-card>
+    
+### Styling
+
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--fs-person-card-width` | The width of the card | `400px`
+
+You may also use the `fs-person-portrait` custom style properties to style the portrait.
 
 @group FamilySearch Elements
 @element fs-person-card
@@ -29,96 +40,18 @@ You can also specify toolbar actions for the paper card:
   <template>
     <style>
       :host {
+        width: var(--fs-person-card-width, 400px);
         display: block;
-        font-family: arial;
-        --paper-spinner-layer-1-color: var(--paper-grey-400);
-        --paper-spinner-layer-2-color: var(--paper-grey-400);
-        --paper-spinner-layer-3-color: var(--paper-grey-400);
-        --paper-spinner-layer-4-color: var(--paper-grey-400);
       }
       
       paper-card {
-        width: 400px;
-        min-height: 100px;
-      }
-      
-      .body {
-        position: relative; 
-      }
-      
-      #spinner {
-        position: absolute;
-        left: 50%;
-        top: 10px;
-      }
-      
-      table {
-        border-collapse: collapse;
-        border-spacing: 0;
-      }
-      
-      .header {
-        overflow: auto;
-      }
-      
-      .name {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      
-      fs-person-portrait {
-        float: left;
-        margin-right: 16px;
-      }
-      
-      .vitals {
-        margin-top: 8px;
-      }
-      
-      .vitals th {
-        width: 75px;
-        font-weight: normal;
-        vertical-align: top;
-        text-align: right;
-        padding-right: 16px;
-        font-size: smaller;
-        text-transform: uppercase;
-      }
-      
-      .vitals th,
-      .vitals td {
-        padding-top: 8px;
+        display: block;
       }
     </style>
     <fs-client name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
     <paper-card>
       <div class="card-content">
-        <div class="header">
-          <fs-person-portrait id="portrait"></fs-person-portrait>
-          <div class="name"></div>
-          <div class="details">
-            <div class="pid"></div>
-          </div>
-        </div>
-        <div class="body">
-          <paper-spinner id="spinner" alt="Loading person details"></paper-spinner>
-          <table class="vitals">
-            <tr class="birth">
-              <th>Birth</th>
-              <td>
-                <div class="date"></div>
-                <div class="place"></div>
-              </td>
-            </tr>
-            <tr class="death">
-              <th>Death</th>
-              <td>
-                <div class="date"></div>
-                <div class="place"></div>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <fs-person-summary person-id="[[personId]]"></fs-person-summary>
       </div>
       <content></content>
     </paper-card>
@@ -164,44 +97,7 @@ You can also specify toolbar actions for the paper card:
 
     },
     
-    behaviors: [FSBehavior],
-    
-    attached: function() {
-      this.loadPerson();
-    },
-    
-    loadPerson: function(){
-      var self = this;
-      if(!this._requested && this.isAuthenticated() && this.personId){
-        this.$.spinner.active = true;
-        this._set_requested(true);
-        this.getClient().getPerson(this.personId).then(function(response){
-          self.person = response.getPerson();
-        });
-      }
-    },
-    
-    _authenticatedChanged: function(event){
-      if(event.detail.value){
-        this.loadPerson();
-      }
-    },
-    
-    _idChanged: function(){
-      this.loadPerson();
-    },
-    
-    _personChanged: function(person){
-      this.$.portrait.person = person;
-      this.$.portrait.gender = person.getDisplayGender();
-      this.$$('.name').textContent = person.getDisplayName();
-      this.$$('.pid').textContent = person.getId();
-      this.$$('.birth .date').textContent = person.getDisplayBirthDate();
-      this.$$('.birth .place').textContent = person.getDisplayBirthPlace();
-      this.$$('.death .date').textContent = person.getDisplayDeathDate();
-      this.$$('.death .place').textContent = person.getDisplayDeathPlace();
-      this.$.spinner.active = false;
-    }
+    behaviors: [FSBehavior]
     
   });
 
