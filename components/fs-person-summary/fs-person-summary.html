@@ -1,0 +1,124 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fs-client/fs-client.html">
+<link rel="import" href="../fs-person-behavior/fs-person-behavior.html">
+<link rel="import" href="../fs-person-portrait/fs-person-portrait.html">
+
+<!--
+A FamilySearch person summary.
+
+Basic example:
+
+    <fs-person-summary person-id="PPP-PPPP"></fs-person-summary>
+    
+### Styling
+
+You may use any of the `fs-person-portrait` custom style properties to style the portrait.
+
+@group FamilySearch Elements
+@element fs-person-summary
+@demo demo/index.html
+-->
+<dom-module id="fs-person-summary">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        flex-direction: row;
+        font-family: arial;
+        position: relative;
+        min-height: 100px;
+      }
+      
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      
+      fs-person-portrait {
+        margin-right: 16px;
+      }
+      
+      .vital {
+        margin-top: 8px;
+      }
+      
+      .label {
+        font-size: smaller;
+        text-transform: uppercase;
+      }
+    </style>
+    <fs-client name="[[clientName]]" on-authenticated-changed="_authenticatedChanged"></fs-client>
+    <fs-person-portrait id="portrait" client-name="[[clientName]]"></fs-person-portrait>
+    <div class="body">
+      <div class="name"></div>
+      <div class="pid"></div>
+      <div class="vital birth">
+        <div class="label">Birth</div>
+        <div class="date"></div>
+        <div class="place"></div>
+      </div>
+      <div class="vital death">
+        <div class="label">Death</div>
+        <div class="date"></div>
+        <div class="place"></div>
+      </div>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'fs-person-summary',
+    
+    properties: {
+      
+      person: {
+        observer: '_personChanged'
+      },
+      
+      /**
+       * The name shown if a person has not been set (is loading)
+       */
+      defaultName: {
+        type: String,
+        value: 'Loading...'
+      }
+      
+    },
+    
+    behaviors: [FSPersonBehavior],
+    
+    ready: function(){
+      this.$$('.name').textContent = this.defaultName;
+    },
+    
+    _personChanged: function(person){
+      if(person){
+        this.$.portrait.person = person;
+        this.$.portrait.gender = person.display.gender;
+        this.$$('.name').textContent = person.display.name;
+        this.$$('.pid').textContent = person.id;
+        this.$$('.birth .date').textContent = person.display.birthDate;
+        this.$$('.birth .place').textContent = person.display.birthPlace;
+        this.$$('.death .date').textContent = person.display.deathDate;
+        this.$$('.death .place').textContent = person.display.deathPlace;
+      } else {
+        this.$.portrait.person = null;
+        this.$$('.name').textContent = this.defaultName;
+        this.$$('.pid').textContent = '';
+        this.$$('.birth .date').textContent = '';
+        this.$$('.birth .place').textContent = '';
+        this.$$('.death .date').textContent = '';
+        this.$$('.death .place').textContent = '';
+      }
+    }
+    
+  });
+</script>

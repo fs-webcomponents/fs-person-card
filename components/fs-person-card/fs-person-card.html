@@ -1,0 +1,79 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fs-person-summary/fs-person-summary.html">
+<link rel="import" href="../paper-card/paper-card.html">
+
+<!--
+A FamilySearch person card.
+
+Basic example:
+
+    <fs-person-card person-id="PPP-PPPP"></fs-person-card>
+    
+You can also specify toolbar actions for the paper card:
+
+    <fs-person-card person-id="PPP-PPPP">
+      <div class="card-actions">
+        <paper-button>Action</paper-button>
+        <paper-icon-button icon="favorite"></paper-icon-button>
+      </div>
+    </fs-person-card>
+    
+### Styling
+
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--fs-person-card-width` | The width of the card | `400px`
+
+You may also use the `fs-person-portrait` custom style properties to style the portrait.
+
+@group FamilySearch Elements
+@element fs-person-card
+@demo demo/index.html
+-->
+<dom-module id="fs-person-card">
+  <template>
+    <style>
+      :host {
+        width: var(--fs-person-card-width, 400px);
+        display: block;
+      }
+      
+      paper-card {
+        display: block;
+      }
+    </style>
+    <paper-card>
+      <div class="card-content">
+        <fs-person-summary person-id="{{personId}}" client-name="{{clientName}}"></fs-person-summary>
+      </div>
+      <content></content>
+    </paper-card>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'fs-person-card',
+
+    properties: {
+
+      /**
+       * Person ID
+       *
+       * @type String
+       */
+      personId: {
+        type: String,
+        reflectToAttribute: true
+      }
+      
+    }
+    
+  });
+
+</script>
