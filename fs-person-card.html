@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../fs-behavior/fs-behavior.html">
 <link rel="import" href="../fs-person-summary/fs-person-summary.html">
 <link rel="import" href="../paper-card/paper-card.html">
 
@@ -70,30 +69,10 @@ You may also use the `fs-person-portrait` custom style properties to style the p
        */
       personId: {
         type: String,
-        notify: true,
-        observer: '_idChanged',
         reflectToAttribute: true
-      },
-      
-      /**
-       * Person
-       * 
-       * @type Object
-       */
-      person: {
-        type: Object,
-        notify: true,
-        observer: '_personChanged'
-      },
-      
-      _requested: {
-        type: Boolean,
-        readOnly: true
       }
-
-    },
-    
-    behaviors: [FSBehavior]
+      
+    }
     
   });
 
