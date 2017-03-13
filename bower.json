@@ -17,13 +17,13 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "paper-card": "PolymerElements/paper-card#^1.0.4",
-    "fs-person-summary": "fs-webcomponents/fs-person-summary#^2.0.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-card": "PolymerElements/paper-card#2.0-preview",
+    "fs-person-summary": "fs-webcomponents/fs-person-summary#polymer-2"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "fs-signin": "fs-webcomponents/fs-signin#^2.0.0",
-    "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.3"
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "fs-signin": "fs-webcomponents/fs-signin#polymer-2",
+    "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview"
   }
 }
