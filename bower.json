@@ -20,11 +20,12 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
-    "fs-person-summary": "fs-webcomponents/fs-person-summary#^3.0.0"
+    "fs-person-summary": "fs-webcomponents/fs-person-summary#v4",
+    "fs-api-aware": "fs-webcomponents/fs-api-aware"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.0",
-    "fs-signin": "fs-webcomponents/fs-signin#^3.0.0",
-    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0"
+    "fs-signin": "fs-webcomponents/fs-signin#v4",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^2.0.1"
   }
 }

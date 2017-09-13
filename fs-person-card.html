@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../fs-api-aware/fs-api-aware.html">
 <link rel="import" href="../fs-person-summary/fs-person-summary.html">
 <link rel="import" href="../paper-card/paper-card.html">
 
@@ -46,34 +47,28 @@ You may also use the `fs-person-portrait` custom style properties to style the p
     </style>
     <paper-card>
       <div class="card-content">
-        <fs-person-summary person-id="{{personId}}" client-name="{{clientName}}"></fs-person-summary>
+        <fs-person-summary person-id="{{personId}}" client-name="[[clientName]]"></fs-person-summary>
       </div>
       <slot></slot>
     </paper-card>
   </template>
-
-</dom-module>
-
-<script>
-
-  Polymer({
-
-    is: 'fs-person-card',
-
-    properties: {
-
-      /**
-       * Person ID
-       *
-       * @type String
-       */
-      personId: {
-        type: String,
-        reflectToAttribute: true
+  <script>
+    class FSPersonCard extends FSApiAwareMixin(Polymer.Element) {
+      static get is() { return 'fs-person-card'; }
+      static get properties() {
+        return {
+          /**
+           * Person ID
+           *
+           * @type String
+           */
+          personId: {
+            type: String,
+            reflectToAttribute: true
+          }
+        };
       }
-      
     }
-    
-  });
-
-</script>
+    customElements.define(FSPersonCard.is, FSPersonCard);
+  </script>
+</dom-module>
